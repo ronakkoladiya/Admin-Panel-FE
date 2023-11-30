@@ -1,0 +1,19 @@
+.common_h6 {
+  color: #00032E;
+  font-size: 15px;
+  font-weight: 400;
+  padding-bottom: 10px;
+}
+.search_button{
+    cursor: pointer;
+    background :none;
+    border: none;
+}
+.search_btn_h6{
+    color: #00032E;
+    font-size: 15px;
+    font-weight: 400;
+    padding-top: 34px;
+    justify-content: center;
+    display: flex;
+}

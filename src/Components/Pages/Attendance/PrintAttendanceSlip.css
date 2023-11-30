@@ -1,0 +1,26 @@
+/*FOR PRINTING SALARY SLIP*/
+
+/* Print-specific styles */
+
+@media print {
+
+    body {
+        visibility: hidden;
+        transform: scale(0.97);
+
+    }
+    @page {
+        size: landscape;
+    }
+    #printableContent, #printableContent {
+        visibility: visible;
+        
+    }
+    #printableContent {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin-top: 0;
+    }
+}

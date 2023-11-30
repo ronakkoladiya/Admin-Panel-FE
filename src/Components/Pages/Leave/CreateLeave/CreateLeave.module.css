@@ -1,0 +1,10 @@
+.h6tag{
+    color: #00032E;
+    font-size: 15px;
+    font-weight: 400;
+    padding: 20px 0px 10px 0px ;
+}
+
+.error{
+    color: red;
+}

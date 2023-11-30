@@ -1,0 +1,126 @@
+.imgresize{
+    width: 80px;
+    object-fit: contain;
+}
+.textTypographyBvm{
+    color: #00032E;
+    font-size: 16px;
+    font-weight: 600;
+}
+.textTypographyBvmText{
+    color: #808297;
+    font-size: 12px;
+
+}
+.textTypographyBvmTextSide{
+    color: #00032E;
+    font-size: 14px;
+
+}
+
+.topbar{
+    border-bottom: 2px solid rgba(0, 0, 0, 0.16);
+}
+
+table {
+    border-collapse: collapse;
+}
+
+th, td {
+  text-align: left;
+  padding: 3px 0;
+}
+
+th{
+    color: #808297;
+    font-size: 14px;
+    font-weight: 500;
+    padding-right: 10px;
+}
+
+td{
+    color:#00032E;
+    font-size: 15px; 
+    margin-left: 3px;
+    font-weight: 600;
+}
+
+.sec3box .box1,.sec3box .box2{
+    width: 50%;
+}
+
+.sec3box .headpart{
+    font-weight: 600;
+}
+
+.sec3box .details{
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.sec3box .details div:last-child{
+    font-weight: 600;
+}
+
+.companydetail{
+    margin-right: 20px;
+}
+
+.printbtn{
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 16px;
+    padding: 10px 20px;
+    background-color: #8189FF;
+    color: #FFFFFF;
+    border: 0;
+    cursor: pointer;
+    outline: none;
+    transition: .3s;
+}
+
+.printbtn:hover{
+    background-color: #5353f5;
+}
+
+
+
+
+
+/* media query */
+
+@media only screen and (max-width: 689px){
+    .paymonth{
+        margin-top: 20px;
+    }
+}
+
+@media only screen and (max-width: 539px){
+    .finalamount{
+        width: 100%;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .finalcontent{
+        padding-top: 20px;
+    }
+}
+
+@media only screen and (max-width: 579px){
+    .netpaybox{
+        margin-top: 20px;
+    }
+}
+
+@media only screen and (max-width: 599px){
+    .sec3box .box1,.sec3box .box2{
+        width: 100%;
+        padding: 0;
+    }
+
+    .sec3box .box2{
+        margin-top: 20px;
+    }
+}

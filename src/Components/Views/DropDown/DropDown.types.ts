@@ -1,0 +1,22 @@
+interface IProps {
+  labelName?: any,
+  variant?: string,
+  label?: string,
+  options?: any,
+  allselectsx?: any,
+  withoutlined?: any,
+  selectsx?: any,
+  onChange?: any,
+  defaultValue?: any,
+  onBlur?: any,
+  onFocus?: any,
+  optionsx?: any,
+  IconComponent?: any,
+  optionColor?: any,
+  error?: boolean,
+  multiple?: boolean,
+  enabled?:boolean,
+  sx?: any,
+  value?: any,
+}
+export type { IProps};

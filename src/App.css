@@ -1,0 +1,17 @@
+
+::-webkit-scrollbar {
+    width: 2px;
+    height: 3px;
+    cursor: pointer;
+}
+
+/* Define scrollbar track styles */
+::-webkit-scrollbar-track {
+    background-color: #F2F5FF;
+}
+
+/* Define scrollbar thumb styles */
+::-webkit-scrollbar-thumb {
+    background-color: #8189ff;
+    border-radius: 2px;
+}

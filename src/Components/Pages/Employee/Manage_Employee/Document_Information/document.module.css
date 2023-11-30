@@ -1,0 +1,118 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Open Sans", sans-serif;
+}
+
+.card_div2 {
+    margin-top: 25px;
+    padding: 18px 25px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    color: #00032E;
+    position: relative;
+    overflow-x: auto;
+}
+
+.card_div2 h6 {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 18px;
+    letter-spacing: 0;
+    text-align: left;
+    color: #00032E;
+}
+
+.main_type_div {
+    display: flex;
+    margin-top: 20px;
+}
+
+.mng_type_div {
+    width: 240px;
+    margin-right: 20px;
+}
+
+.type_p1 {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 16px;
+    letter-spacing: 0;
+    text-align: left;
+    color: #000981;
+}
+
+.type_p2_1 {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border: 2px dotted lightgray;
+    margin-top: 12px;
+    border-radius: 6px;
+    width: 133.63px;
+    padding: 10px 15px;
+}
+
+.type_p2_1 p {
+    font-size: 6px;
+    font-weight: 400;
+    line-height: 6px;
+    letter-spacing: 0;
+    margin-left: 5px;
+    color: #00032E;
+}
+
+.type_p2_1 span {
+    border-radius: 3px;
+    letter-spacing: 0;
+    font-size: 5px;
+    font-weight: 600;
+    line-height: 10px;
+    text-align: left;
+    margin-left: 10px;
+    padding: 0 4px;
+    background: #000981;
+    color: #FFFFFF;
+}
+
+.type_p2_2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px dotted lightgray;
+    margin-top: 12px;
+    border-radius: 6px;
+    width: 133.63px;
+    padding: 4px 15px;
+    cursor: pointer;
+}
+
+.type_p2_2 p {
+    font-size: 6px;
+    font-weight: 400;
+    line-height: 10px;
+    letter-spacing: 0;
+    text-align: left;
+}
+
+.type_p2_2 i {
+    font-size: 12px;
+}
+
+.doc_icon_div {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    position: absolute;
+    top: 68px;
+    background: #D9D9D9;
+    cursor: pointer;
+}
+
+.doc_icon {
+    font-size: 25px;
+    position: absolute;
+    top: 7px;
+    right: 8px;
+}

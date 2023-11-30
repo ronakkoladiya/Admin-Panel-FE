@@ -1,0 +1,58 @@
+.manageDesig{
+    margin-top: 20px;
+    background-color: white;
+    border-radius: 20px;
+    padding: 30px;
+}
+
+.manageDesig p{
+    color: rgba(0, 3, 46, 0.7);
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+.cancelBtn, .saveBtn{
+    padding: 10px 25px;
+    margin: 0 8px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: .3s;
+}
+
+.cancelBtn{
+    background-color: #808297;
+    color: white;
+}
+
+.cancelBtn:hover{
+    background-color: #6e7085;
+}
+
+.saveBtn{
+    background-color: #8189FF;
+    color: white;
+}
+
+.saveBtn:hover{
+    background-color: #6e74dc;
+}
+
+.disabled{
+    opacity: .6;
+    pointer-events: none;
+}
+
+.tabHead{
+    font-size: 16px;
+}
+
+
+@media only screen and (max-width: 599px){
+    .btnGrid{
+        text-align: center;
+        margin-top: 20px;
+    }
+}

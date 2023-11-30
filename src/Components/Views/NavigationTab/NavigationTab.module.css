@@ -1,0 +1,45 @@
+.navTab nav{
+    display: flex;
+    overflow-x: auto;
+}
+
+.navTab{
+    position: relative;
+}
+
+.navTab::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    border-bottom: 3px solid #c2c5d5;
+}
+
+.titleBtn{
+    cursor: pointer;
+    outline: none;
+    margin: 0 20px;
+    background-color: transparent;
+    border: none;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 20px 0;
+    color: #9c9fb1;
+    transition: .3s;
+}
+
+.activeNav{
+    color: #00032e;
+    position: relative;
+}
+
+.activeNav::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    border-bottom: 3px solid #00032e;
+    border-radius: 10px;
+}

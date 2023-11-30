@@ -1,0 +1,46 @@
+td, th{
+    border: none!important;
+}
+
+td{
+    font-size: 15px!important;
+}
+
+.tabHead{
+    font-size: 16px;
+}
+
+.tabView{
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: #8189FF;
+    font-size: 15px;
+    letter-spacing: .5px;
+    cursor: pointer;
+}
+
+.imgBox{
+    justify-content: start!important;
+}
+
+.imgBox > div{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    font-size: 12px;
+}
+
+.statusICO{
+    vertical-align: middle;
+    margin-right: 5px;
+    margin-top: -2px;
+}
+
+.statusActive{
+    color: #15C787;
+}
+
+.statusDeactive{
+    color: #F46A6A;
+}

@@ -1,0 +1,950 @@
+Subject: [PATCH] validation
+---
+Index: package.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/package.json b/package.json
+--- a/package.json	(revision 14c23a52a4710d820d58c46d922531e00e8f3705)
++++ b/package.json	(revision d52ad2b199a282340659de18eb9480ccfd9e4b4e)
+@@ -13,13 +13,16 @@
+     "@types/node": "^16.18.38",
+     "@types/react": "^18.2.15",
+     "@types/react-dom": "^18.2.7",
++    "formik": "^2.4.2",
+     "react": "^18.2.0",
+     "react-dom": "^18.2.0",
+     "react-icons": "^4.10.1",
+     "react-router-dom": "^6.14.2",
+     "react-scripts": "5.0.1",
++    "sweetalert2": "^11.7.18",
+     "typescript": "^4.9.5",
+-    "web-vitals": "^2.1.4"
++    "web-vitals": "^2.1.4",
++    "yup": "^1.2.0"
+   },
+   "scripts": {
+     "start": "react-scripts start",
+Index: src/Components/Pages/Forget/Style/Forget.module.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Components/Pages/Forget/Style/Forget.module.css b/src/Components/Pages/Forget/Forget.module.css
+rename from src/Components/Pages/Forget/Style/Forget.module.css
+rename to src/Components/Pages/Forget/Forget.module.css
+--- a/src/Components/Pages/Forget/Style/Forget.module.css	(revision 14c23a52a4710d820d58c46d922531e00e8f3705)
++++ b/src/Components/Pages/Forget/Forget.module.css	(revision d52ad2b199a282340659de18eb9480ccfd9e4b4e)
+@@ -1,6 +1,6 @@
+ @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,700;1,900&display=swap');
+ .for_main {
+-    width: 600px;
++    width: 450px;
+     @media screen and (min-width:200px) and (max-width:400px) {
+         width: 250px;
+     }
+@@ -10,9 +10,9 @@
+     @media screen and (min-width:600px) and (max-width:900px) {
+         width: 400px;
+     }
+-    @media screen and (min-width:900px) and (max-width:1200px) {
++    /* @media screen and (min-width:900px) and (max-width:1200px) {
+         width: 500px;
+-    }
++    } */
+     margin: 10% auto;
+     padding: 40px 20px;
+     font-family: 'Roboto',
+@@ -23,6 +23,7 @@
+ .for_sub {
+     width: 90%;
+     margin: 0 auto;
++    /* border: 1px solid red; */
+ }
+ .for_key {
+     text-align: center;
+@@ -72,7 +73,7 @@
+     font-size: 16px;
+ }
+ .for_form input[type='email'] {
+-    width: 519.5px;
++    width: 389px;
+     @media screen and (min-width:200px) and (max-width:400px) {
+         width: 208px !important;
+     }
+@@ -82,9 +83,9 @@
+     @media screen and (min-width:600px) and (max-width:900px) {
+         width: 342px;
+     }
+-    @media screen and (min-width:900px) and (max-width:1200px) {
++    /* @media screen and (min-width:900px) and (max-width:1200px) {
+         width: 430px;
+-    }
++    } */
+     padding: 7px;
+     border: 2px solid rgba(0, 0, 0, 0.6);
+     border-radius: 5px;
+@@ -115,7 +116,7 @@
+     font-size: 18px;
+     color: black;
+     position: absolute;
+-    right: 60%;
++    right: 62.9%;
+     font-weight: 700 !important;
+ 
+     @media screen and (min-width:200px) and (max-width:600px) {
+Index: src/Components/Pages/Forget/Forget.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Components/Pages/Forget/Forget.tsx b/src/Components/Pages/Forget/Forget.tsx
+--- a/src/Components/Pages/Forget/Forget.tsx	(revision 14c23a52a4710d820d58c46d922531e00e8f3705)
++++ b/src/Components/Pages/Forget/Forget.tsx	(revision d52ad2b199a282340659de18eb9480ccfd9e4b4e)
+@@ -1,5 +1,5 @@
+-import React from 'react';
+-import style from "./Style/Forget.module.css";
++import { useState, useEffect } from 'react';
++import style from "./Forget.module.css";
+ import { BsKey } from "react-icons/bs";
+ import { FaArrowLeft } from "react-icons/fa";
+ import { PiDotOutlineFill } from "react-icons/pi";
+@@ -8,68 +8,136 @@
+ import TextField from '@mui/material/TextField';
+ import Button from '@mui/material/Button';
+ import { useNavigate } from 'react-router';
++import Swal from 'sweetalert2'
++
+ 
+ 
+ 
+ function Forget() {
++  const [obj, setobj] = useState({
++    id: Date.now(),
++    email: '',
++  });
++  const [local, setlocal] = useState<Array<{ id: number; email: string; password: string }>>([]);
++  const [emailError, setEmailError] = useState('');
+ 
++  useEffect(() => {
++    const data = localStorage.getItem('array');
++    if (data !== null) {
++      setlocal(JSON.parse(data));
++    }
++  }, []);
+   const naviagte = useNavigate()
+ 
+   const handleclick = () => {
+     naviagte('/login')
+   }
++  const isValidEmail = (email: string) => {
++    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
++    return emailPattern.test(email);
++  };
++  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
++    const email = e.target.value;
++    setobj((prevObj) => ({
++      ...prevObj,
++      email: email
++    }));
++    if (!isValidEmail(email)) {
++      setEmailError('enter valid email');
++    } else {
++      setEmailError('');
++    }
++  };
+ 
+   const handleresetpassword = () => {
+-    naviagte('/newpassword')
++    let emaildata = local.find(x => x.email == obj.email);
++    console.log(emaildata, 'kdjfhdjkhsfdg')
++    if (emaildata) {
++      if (emaildata.email == obj.email) {
++        localStorage.setItem('emaildata', JSON.stringify(emaildata));
++        Swal.fire({
++          icon: "success",
++          title: "Successfully Login !",
++          position: "top",
++          timer: 1000,
++          showConfirmButton: false,
++        });
++        naviagte('/newpassword')
++      }
++    }
++    else {
++      Swal.fire({
++        icon: "error",
++        title: "Email is Wrong !",
++        text: "Please Enter your true Email",
++        position: "top",
++        toast: true,
++        timer: 1000,
++        showConfirmButton: false,
++        timerProgressBar: true,
++      });
++    }
+   }
++
++
+   return (
+     <>
+       <div className={style.for_main}>
+-        <div className={style.for_sub}>
+-          <div className={style.for_key}>
+-            <div className="icon">
+-              <i><BsKey /></i>
+-            </div>
+-          </div>
+-          <div className={style.for_text}>
+-            <h1>Forgot password?</h1>
+-            <p>No worries, we’ll send you reset instructions.</p>
+-          </div>
++        <form>
++          <div className={style.for_sub}>
++            <div className={style.for_key}>
++              <div className="icon">
++                <i><BsKey /></i>
++              </div>
++            </div>
++            <div className={style.for_text}>
++              <h1>Forgot password?</h1>
++              <p>No worries, we’ll send you reset instructions.</p>
++            </div>
+ 
+-          <div className={style.for_form}>
+-            <InputLabel htmlFor="bootstrap-input"
+-              className={style.for_lable}>Email<i><PiDotOutlineFill /></i></InputLabel>
+-            <FormControl>
+-              <TextField
+-                id="bootstrap-input1"
+-                type={"email"}
+-                placeholder={"Enter your name"}
+-              />
+-            </FormControl>
+-          </div>
++            <div className={style.for_form}>
++              <InputLabel htmlFor="bootstrap-input"
++                className={style.for_lable}>Email<i><PiDotOutlineFill /></i></InputLabel>
++              <FormControl>
++                <TextField
++                  id="bootstrap-input1"
++                  type={"email"}
++                  placeholder={"Enter your name"}
++                  name='email'
++                  value={obj.email}
++                  onChange={handleEmailChange}
++                />
++              </FormControl>
++              {
++                emailError && (
++                  <p style={{ color: 'red', fontSize: '14px', fontWeight: '100', marginTop: '5px' }}>{emailError}</p>
++                )
++              }
++            </div>
+ 
+-          <div className={style.for_button}>
+-            <Button
+-              fullWidth={true}
+-              sx={{
+-                background: 'linear-gradient(90deg, #39415C 0%, #040822 102.08%)',
+-                padding: '10px',
+-                fontSize: '14px',
+-                fontWeight: '600',
+-                textTransform: 'capitalize',
+-                color: 'white',
+-                width: '100%'
+-              }}
+-              onClick={handleresetpassword}
+-            >Reset Password</Button>
+-          </div>
++            <div className={style.for_button}>
++              <Button
++                fullWidth={true}
++                sx={{
++                  background: 'linear-gradient(90deg, #39415C 0%, #040822 102.08%)',
++                  padding: '10px',
++                  fontSize: '14px',
++                  fontWeight: '600',
++                  textTransform: 'capitalize',
++                  color: 'white',
++                  width: '100%'
++                }}
++                onClick={handleresetpassword}
++              >Reset Password</Button>
++            </div>
+ 
+-          <div className={style.for_backlogin}>
+-            <p className={style.for_link} onClick={handleclick}>
+-              <i><FaArrowLeft /></i><span>Back to log in</span>
+-            </p>
+-          </div>
+-        </div>
++            <div className={style.for_backlogin}>
++              <p className={style.for_link} onClick={handleclick}>
++                <i><FaArrowLeft /></i><span>Back to log in</span>
++              </p>
++            </div>
++          </div>
++        </form>
+       </div>
+     </>
+   )
+Index: src/Components/Pages/Login/Style/Login.module.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Components/Pages/Login/Style/Login.module.css b/src/Components/Pages/Login/Login.module.css
+rename from src/Components/Pages/Login/Style/Login.module.css
+rename to src/Components/Pages/Login/Login.module.css
+--- a/src/Components/Pages/Login/Style/Login.module.css	(revision 14c23a52a4710d820d58c46d922531e00e8f3705)
++++ b/src/Components/Pages/Login/Login.module.css	(revision d52ad2b199a282340659de18eb9480ccfd9e4b4e)
+@@ -1,7 +1,7 @@
+ @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,700;1,900&display=swap');
+ 
+ .main {
+-    width: 600px;
++    width: 450px;
+     @media screen and (min-width:200px) and (max-width:400px) {
+         width: 250px;
+     }
+@@ -11,9 +11,9 @@
+     @media screen and (min-width:600px) and (max-width:900px) {
+         width: 400px;
+     }
+-    @media screen and (min-width:900px) and (max-width:1200px) {
++    /* @media screen and (min-width:900px) and (max-width:1200px) {
+         width: 500px;
+-    }
++    } */
+     margin: 5% auto;
+     padding: 40px 20px;
+     font-family: 'Roboto', sans-serif;
+@@ -39,6 +39,7 @@
+ .sub {
+     width: 90%;
+     margin: 0 auto;
++    /* border: 1px solid red; */
+ }
+ .welcome h1 {
+     margin-bottom: 8px;
+@@ -72,7 +73,7 @@
+     font-size: 18px;
+ }
+ .form input[type='email'] {
+-    width: 525px;
++    width: 390px;
+     @media screen and (min-width:200px) and (max-width:400px) {
+         width: 210px !important;
+     }
+@@ -82,16 +83,16 @@
+     @media screen and (min-width:600px) and (max-width:900px) {
+         width: 345px;
+     }
+-    @media screen and (min-width:900px) and (max-width:1200px) {
++    /* @media screen and (min-width:900px) and (max-width:1200px) {
+         width: 435px;
+-    }
++    } */
+     padding: 6px;
+     border: 2px solid rgba(0, 0, 0, 0.6);
+     border-radius: 5px;
+ }
+ .form input[type='password'],
+ .form input[type='text'] {
+-    width: 525px;
++    width: 390px;
+     @media screen and (min-width:200px) and (max-width:400px) {
+         width: 210px !important;
+     }
+@@ -101,9 +102,9 @@
+     @media screen and (min-width:600px) and (max-width:900px) {
+         width: 345px;
+     }
+-    @media screen and (min-width:900px) and (max-width:1200px) {
++    /* @media screen and (min-width:900px) and (max-width:1200px) {
+         width: 435px;
+-    }
++    } */
+     padding: 6px;
+     border: 2px solid rgba(0, 0, 0, 0.6);
+     border-radius: 5px;
+Index: src/Components/Pages/Login/Login.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Components/Pages/Login/Login.tsx b/src/Components/Pages/Login/Login.tsx
+--- a/src/Components/Pages/Login/Login.tsx	(revision 14c23a52a4710d820d58c46d922531e00e8f3705)
++++ b/src/Components/Pages/Login/Login.tsx	(revision d52ad2b199a282340659de18eb9480ccfd9e4b4e)
+@@ -1,5 +1,5 @@
+-import { useState } from 'react';
+-import style from './Style/Login.module.css';
++import { useState, useEffect } from 'react';
++import style from './Login.module.css';
+ import FormControl from '@mui/material/FormControl';
+ import InputLabel from '@mui/material/InputLabel';
+ import TextField from '@mui/material/TextField';
+@@ -13,10 +13,24 @@
+ import { MdVisibility, MdOutlineVisibilityOff } from "react-icons/md";
+ import { useNavigate } from 'react-router-dom';
+ 
++interface UserObject {
++    id: number;
++    email: string;
++    password: string;
++}
++
+ function Login() {
+     const [showPassword, setShowPassword] = useState(false);
+-    const [email, setEmail] = useState('');
+-    const [password, setPassword] = useState('');
++    const blankobj = {
++        id: Date.now(),
++        email: '',
++        password: ''
++    }
++    const [obj, setobj] = useState({ ...blankobj });
++    const [array, setarray] = useState<UserObject[]>([]);
++    const [emailError, setEmailError] = useState('');
++    const [passwordError, setPasswordError] = useState('');
++
+     const navigate = useNavigate()
+ 
+     const handleTogglePassword = () => {
+@@ -25,79 +39,165 @@
+     const handleclick = () => {
+         navigate('/forget');
+     }
++
++    const isValidEmail = (email: string) => {
++        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
++        return emailPattern.test(email);
++    };
++    const isValidPassword = (password: string) => {
++        const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,15}$/;
++        return passwordPattern.test(password);
++    };
++
++    const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
++        const email = e.target.value;
++        setobj((prevObj) => ({
++            ...prevObj,
++            email:email
++        }));
++        if (!isValidEmail(email)) {
++            setEmailError('enter valid email');
++        } else {
++            setEmailError('');
++        }
++    };
++
++    const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
++        const password = e.target.value;
++        setobj((prevObj) => ({
++            ...prevObj,
++            password: password,
++        }));
++        if (!isValidPassword(password)) {
++            setPasswordError('Password must have at least one uppercase letter, one lowercase letter, one special character, and be between 6 and 15 characters long.');
++        } else {
++            setPasswordError('');
++        }
++    };
++
++    const handlesingnup = () => {
++        if (obj.email === '' && obj.password === '') {
++            setEmailError('Email is required.');
++            setPasswordError('Password is required.');
++        } else if (!isValidEmail(obj.email)) {
++            setEmailError('Invalid email format.');
++        } 
++        // else if (obj.password === '') {
++        //     setPasswordError('Password is required.');
++        // } 
++        // else if (obj.password.length < 6 || obj.password.length > 15) {
++        //     setPasswordError('Password must be between 6 and 15 characters long.');
++        // } else if (!isValidPassword(obj.password)) {
++        //     setPasswordError('Password must contain at least 1 uppercase letter, 1 lowercase letter, and 1 special character.');
++        // } 
++        else {
++            array.push(obj);
++            setarray([...array]);
++            console.log(array, 'first');
++            setobj({ ...blankobj });
++            setEmailError('');
++            setPasswordError('');
++            localStorage.setItem('array', JSON.stringify(array));
++        }
++    }
++    useEffect(() => {
++        const data = localStorage.getItem('array');
++        if (data !== null) {
++            setarray(JSON.parse(data));
++        }
++    }, []);
++
++
+     return (
+         <>
+             <div className={style.main}>
+-                <div className={style.sub}>
+-                    <div className={style.logo}>
+-                        <img src={logo} alt="" />
+-                    </div>
++                <form>
++
++                    <div className={style.sub}>
++                        <div className={style.logo}>
++                            <img src={logo} alt="" />
++                        </div>
+ 
+-                    <div className={style.welcome}>
+-                        <h1>Welcome Back</h1>
+-                        <p>Please enter your details.</p>
+-                    </div>
++                        <div className={style.welcome}>
++                            <h1>Welcome Back</h1>
++                            <p>Please enter your details.</p>
++                        </div>
+ 
+-                    <div className={style.form}>
+-                        <InputLabel htmlFor="bootstrap-input"
+-                            className={style.lable}> Email{email ? null : <i><PiDotOutlineFill /></i>}</InputLabel>
+-                        <FormControl>
+-                            <TextField
+-                                id="bootstrap-input"
+-                                type={"email"}
+-                                placeholder={"Enter your name"}
+-                                value={email}
+-                                onChange={(e) => setEmail(e.target.value)}
+-                            />
+-                        </FormControl>
+-                    </div>
+-                    <div className={style.form}>
+-                        <InputLabel htmlFor="bootstrap-input" className={style.lable}>Password{password ? null : <i><PiDotOutlineFill /></i>}</InputLabel>
+-                        <FormControl>
+-                            <TextField
+-                                id="bootstrap-input"
+-                                type={showPassword ? "text" : "password"}
+-                                placeholder={"Password"}
+-                                value={password}
+-                                onChange={(e) => setPassword(e.target.value)}
+-                            // InputProps={{
+-                            //     endAdornment: (
+-                            //         <IconButton onClick={handleTogglePassword} edge="end">
+-                            //             {showPassword ? <MdOutlineVisibilityOff /> : <MdVisibility />}
+-                            //         </IconButton>
+-                            //     ),
+-                            // }}
+-                            />
+-                            <IconButton onClick={handleTogglePassword} edge="end" className={style.form_visibleicon}>
+-                                {showPassword ? <MdVisibility /> : <MdOutlineVisibilityOff />}
+-                            </IconButton>
+-                        </FormControl>
++                        <div className={style.form}>
++                            <InputLabel htmlFor="bootstrap-input"
++                                className={style.lable}> Email <i><PiDotOutlineFill /></i></InputLabel>
++                            <FormControl>
++                                <TextField
++                                    id="bootstrap-input"
++                                    type={"email"}
++                                    placeholder={"Enter your name"}
++                                    name='email'
++                                    value={obj.email}
++                                    onChange={handleEmailChange}
++                                />
++                            </FormControl>
++                            {
++                                emailError && (
++                                    <p style={{ color: 'red', fontSize: '14px', fontWeight: '100',marginTop:'5px' }}>{emailError}</p>
++                                )
++                            }
++                        </div>
++                        <div className={style.form}>
++                            <InputLabel htmlFor="bootstrap-input" className={style.lable}>Password<i><PiDotOutlineFill /></i></InputLabel>
++                            <FormControl>
++                                <TextField
++                                    id="bootstrap-input"
++                                    type={showPassword ? "text" : "password"}
++                                    placeholder={"Password"}
++                                    name='password'
++                                    value={obj.password}
++                                    onChange={handlePasswordChange}
++                                // InputProps={{
++                                //     endAdornment: (
++                                //         <IconButton onClick={handleTogglePassword} edge="end">
++                                //             {showPassword ? <MdOutlineVisibilityOff /> : <MdVisibility />}
++                                //         </IconButton>
++                                //     ),
++                                // }}
++                                />
++                                <IconButton onClick={handleTogglePassword} edge="end" className={style.form_visibleicon}>
++                                    {showPassword ? <MdVisibility /> : <MdOutlineVisibilityOff />}
++                                </IconButton>
++                            </FormControl>
++                            {
++                                passwordError && (
++                                    <p style={{ color: 'red', fontSize: '14px', fontWeight: '100',marginTop:'5px'}}>{passwordError}</p>
++                                )
++                            }
+ 
+-                        <div className={style.checkbox} style={{ marginTop: '10px' }}>
+-                            <FormGroup>
+-                                <FormControlLabel control={<Checkbox />} label="Remeber"
+-                                    style={{ color: 'rgba(0, 0, 0, 0.8)', fontWeight: '500' }} />
+-                            </FormGroup>
+-                            <p className={style.link} onClick={handleclick}>
+-                                Forget Password
+-                            </p>
+-                        </div>
+-                    </div>
++                            <div className={style.checkbox} style={{ marginTop: '10px' }}>
++                                <FormGroup>
++                                    <FormControlLabel control={<Checkbox />} label="Remeber"
++                                        style={{ color: 'rgba(0, 0, 0, 0.8)', fontWeight: '500' }} />
++                                </FormGroup>
++                                <p className={style.link} onClick={handleclick}>
++                                    Forget Password
++                                </p>
++                            </div>
++                        </div>
+ 
+-                    <div className={style.button}>
+-                        <Button
+-                            fullWidth={true}
+-                            sx={{
+-                                background: 'linear-gradient(90deg, #39415C 0%, #040822 102.08%)',
+-                                padding: '10px',
+-                                color: 'white',
+-                                fontSize: '14px',
+-                                fontWeight: '600',
+-                                textTransform: 'capitalize'
+-                            }}
+-                        >Sing In</Button>
+-                    </div>
+-                </div>
++                        <div className={style.button}>
++                            <Button
++                                onClick={handlesingnup}
++                                type='button'
++                                fullWidth={true}
++                                sx={{
++                                    background: 'linear-gradient(90deg, #39415C 0%, #040822 102.08%)',
++                                    padding: '10px',
++                                    color: 'white',
++                                    fontSize: '14px',
++                                    fontWeight: '600',
++                                    textTransform: 'capitalize'
++                                }}
++                            >Sing In</Button>
++                        </div>
++                    </div>
++                </form>
+             </div>
+         </>
+     )
+Index: src/Components/Pages/Newpassword/Style/Newpassword.module.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Components/Pages/Newpassword/Style/Newpassword.module.css b/src/Components/Pages/Newpassword/Newpassword.module.css
+rename from src/Components/Pages/Newpassword/Style/Newpassword.module.css
+rename to src/Components/Pages/Newpassword/Newpassword.module.css
+--- a/src/Components/Pages/Newpassword/Style/Newpassword.module.css	(revision 14c23a52a4710d820d58c46d922531e00e8f3705)
++++ b/src/Components/Pages/Newpassword/Newpassword.module.css	(revision d52ad2b199a282340659de18eb9480ccfd9e4b4e)
+@@ -1,6 +1,6 @@
+ @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,700;1,900&display=swap');
+ .newpassword_main {
+-    width: 600px;
++    width: 450px;
+     @media screen and (min-width:200px) and (max-width:400px) {
+         width: 280px;
+     }
+@@ -81,7 +81,7 @@
+ }
+ .newpasswordform input[type='password'],
+ .newpasswordform input[type='text'] {
+-    width: 525px;
++    width: 390px;
+     @media screen and (min-width:200px) and (max-width:400px) {
+         width: 238px !important;
+     }
+@@ -123,7 +123,7 @@
+     font-size: 18px;
+     color: black !important;
+     position: absolute;
+-    right: 60%;
++    right: 62.7%;
+     font-weight: 700 !important;
+     @media screen and (min-width:200px) and (max-width:600px) {
+         right: 70%;
+Index: src/Components/Pages/Newpassword/Newpassword.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Components/Pages/Newpassword/Newpassword.tsx b/src/Components/Pages/Newpassword/Newpassword.tsx
+--- a/src/Components/Pages/Newpassword/Newpassword.tsx	(revision 14c23a52a4710d820d58c46d922531e00e8f3705)
++++ b/src/Components/Pages/Newpassword/Newpassword.tsx	(revision d52ad2b199a282340659de18eb9480ccfd9e4b4e)
+@@ -1,6 +1,6 @@
+ import { useState } from 'react';
+ import { BsKey } from "react-icons/bs";
+-import style from "./Style/Newpassword.module.css";
++import style from "./Newpassword.module.css";
+ import FormControl from '@mui/material/FormControl';
+ import InputLabel from '@mui/material/InputLabel';
+ import TextField from '@mui/material/TextField';
+@@ -11,10 +11,23 @@
+ import { MdVisibility, MdOutlineVisibilityOff } from "react-icons/md";
+ import { useNavigate } from 'react-router';
+ 
+-
++interface UserObject {
++  id: number;
++  confirmPassword: string;
++  password: string;
++}
+ function Newpassword() {
+   const [showPassword, setShowPassword] = useState(false);
+   const [confirmpassword, setconfirmpassword] = useState(false);
++  const [passworderror, setPasswordError] = useState('');
++  const [confirmerror, setconfirmerror] = useState('');
++  const blankobj = {
++    id: Date.now(),
++    password: '',
++    confirmPassword: ''
++  }
++  const [object, setobject] = useState({ ...blankobj })
++  const [array, setarray] = useState<UserObject[]>([]);
+   const navigate = useNavigate()
+ 
+ 
+@@ -25,81 +38,143 @@
+     setconfirmpassword(!confirmpassword);
+   };
+ 
++  const isPasswordValid = (password: string) => {
++    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,15}$/;
++    return passwordRegex.test(password);
++  };
++
++
++  const handlepasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
++    const password = e.target.value;
++    setobject((prevObj) => ({
++      ...prevObj,
++      password: password,
++    }));
++    if (!isPasswordValid(password)) {
++      setPasswordError('Password must have at least one uppercase letter, one lowercase letter, one special character, and be between 6 and 15 characters long.');
++    } else {
++      setPasswordError('');
++    }
++  };
++
++  const handleconfirmpasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
++    const confirmPassword = e.target.value;
++    setobject((prevObj) => ({
++      ...prevObj,
++      confirmPassword: confirmPassword
++    }));
++    if (object.password !== confirmPassword) {
++      setconfirmerror('confirmpassword not match');
++    } else {
++      setconfirmerror('');
++    }
++  }
+   const handleclick = () => {
+     navigate('./login')
+   }
++
++  const handleResetPassword = () => {
++    if (object.password === '' && object.confirmPassword === '') {
++      setPasswordError('Password is required.');
++      setconfirmerror('Confirm password is required.');
++    } else if (!isPasswordValid(object.password)) {
++      setPasswordError('Password must have at least one uppercase letter, one lowercase letter, one special character, and be between 6 and 15 characters long.');
++      setconfirmerror('');
++    } else if (object.password !== object.confirmPassword) {
++      setPasswordError('');
++      setconfirmerror('Confirm password does not match');
++    } else {
++      setPasswordError('');
++      setconfirmerror('');
++      console.log('Password and confirm password are valid.');
++      setobject({ ...blankobj });
++    }
++  };
+   return (
+     <>
+-      <div className={style.newpassword_main}>
+-        <div className={style.newpassword_sub}>
+-          <div className={style.newpassword_key}>
+-            <i><BsKey /></i>
+-          </div>
++      <form action="">
++        <div className={style.newpassword_main}>
++          <div className={style.newpassword_sub}>
++            <div className={style.newpassword_key}>
++              <i><BsKey /></i>
++            </div>
+ 
+-          <div className={style.newpassword_text}>
+-            <h1>Set new password</h1>
+-            <p>Your new password must be different to</p>
+-            <p> previously used passwords.</p>
+-          </div>
++            <div className={style.newpassword_text}>
++              <h1>Set new password</h1>
++              <p>Your new password must be different to</p>
++              <p> previously used passwords.</p>
++            </div>
+ 
+-          <div className={style.newpasswordform}>
+-            <div>
+-              <InputLabel htmlFor="bootstrap-input" className={style.newpassword_lable}>Password<i><PiDotOutlineFill /></i></InputLabel>
+-              <FormControl>
+-                <TextField
+-                  id="bootstrap-input"
+-                  type={showPassword ? "text" : "password"}
+-                  placeholder={"Password"}
+-                // InputProps={{
+-                //     endAdornment: (
+-                //         <IconButton onClick={handleTogglePassword} edge="end">
+-                //             {showPassword ? <MdOutlineVisibilityOff /> : <MdVisibility />}
+-                //         </IconButton>
+-                //     ),
+-                // }}
+-                />
+-                <IconButton onClick={handleTogglePassword} edge="end" className={style.newpassword_visibleicon}>
+-                  {showPassword ? <MdVisibility /> : <MdOutlineVisibilityOff />}
+-                </IconButton>
+-              </FormControl>
+-            </div>
++            <div className={style.newpasswordform}>
++              <div>
++                <InputLabel htmlFor="bootstrap-input" className={style.newpassword_lable}>Password<i><PiDotOutlineFill /></i></InputLabel>
++                <FormControl>
++                  <TextField
++                    id="bootstrap-input"
++                    type={showPassword ? "text" : "password"}
++                    placeholder={"Password"}
++                    name='password'
++                    value={object.password}
++                    onChange={handlepasswordChange}
++                  />
++                  <IconButton onClick={handleTogglePassword} edge="end" className={style.newpassword_visibleicon}>
++                    {showPassword ? <MdVisibility /> : <MdOutlineVisibilityOff />}
++                  </IconButton>
++                </FormControl>
++                {
++                  passworderror && (
++                    <p style={{ color: 'red', fontSize: '14px', fontWeight: '100', marginTop: '5px' }}>{passworderror}</p>
++                  )
++                }
++              </div>
+ 
+-            <div>
+-              <InputLabel htmlFor="bootstrap-input" className={style.newpassword_lable} style={{ marginTop: '5%' }}>Confirm Password<i><PiDotOutlineFill /></i></InputLabel>
+-              <FormControl>
+-                <TextField
+-                  id="bootstrap-input"
+-                  type={confirmpassword ? "text" : "password"}
+-                  placeholder={"Confirm Password"}
+-                />
+-                <IconButton onClick={handleToggleconfirmpassword} edge="end" className={style.newpassword_visibleicon}>
+-                  {confirmpassword ? <MdVisibility /> : <MdOutlineVisibilityOff />}
+-                </IconButton>
+-              </FormControl>
+-            </div>
++              <div>
++                <InputLabel htmlFor="bootstrap-input" className={style.newpassword_lable} style={{ marginTop: '5%' }}>Confirm Password<i><PiDotOutlineFill /></i></InputLabel>
++                <FormControl>
++                  <TextField
++                    id="bootstrap-input"
++                    type={confirmpassword ? "text" : "password"}
++                    placeholder={"Confirm Password"}
++                    name='confirmPassword'
++                    value={object.confirmPassword}
++                    onChange={handleconfirmpasswordChange}
++                  />
++                  <IconButton onClick={handleToggleconfirmpassword} edge="end" className={style.newpassword_visibleicon}>
++                    {confirmpassword ? <MdVisibility /> : <MdOutlineVisibilityOff />}
++                  </IconButton>
++                </FormControl>
++                {
++                  confirmerror && (
++                    <p style={{ color: 'red', fontSize: '14px', fontWeight: '100', marginTop: '5px' }}>{confirmerror}</p>
++                  )
++                }
++              </div>
+ 
+-            <div className={style.newpassword_button}>
+-              <Button
+-                fullWidth={true}
+-                sx={{
+-                  background: 'linear-gradient(90deg, #39415C 0%, #040822 102.08%)',
+-                  padding: '10px',
+-                  color: 'white',
+-                  fontSize: '14px',
+-                  fontWeight: '600',
+-                  textTransform: 'capitalize'
+-                }}>Reset Password</Button>
+-            </div>
++              <div className={style.newpassword_button}>
++                <Button
++                  onClick={handleResetPassword}
++                  fullWidth={true}
++                  type='button'
++                  sx={{
++                    background: 'linear-gradient(90deg, #39415C 0%, #040822 102.08%)',
++                    padding: '10px',
++                    color: 'white',
++                    fontSize: '14px',
++                    fontWeight: '600',
++                    textTransform: 'capitalize'
++                  }}>Reset Password</Button>
++              </div>
+ 
+-            <div className={style.newpassword_backlogin}>
+-              <p className={style.newpassword_link} onClick={handleclick}>
+-                <i><FaArrowLeft /></i><span>Back to log in</span>
+-              </p>
+-            </div>
++              <div className={style.newpassword_backlogin}>
++                <p className={style.newpassword_link} onClick={handleclick}>
++                  <i><FaArrowLeft /></i><span>Back to log in</span>
++                </p>
++              </div>
+ 
+-          </div>
+-        </div>
+-      </div>
++            </div>
++          </div>
++        </div>
++      </form>
+     </>
+   )
+ }
+Index: src/Components/Pages/checkemail/Emailcheck.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Components/Pages/checkemail/Emailcheck.tsx b/src/Components/Pages/checkemail/Emailcheck.tsx
+--- a/src/Components/Pages/checkemail/Emailcheck.tsx	(revision 14c23a52a4710d820d58c46d922531e00e8f3705)
++++ b/src/Components/Pages/checkemail/Emailcheck.tsx	(revision d52ad2b199a282340659de18eb9480ccfd9e4b4e)
+@@ -1,5 +1,5 @@
+ import React from 'react';
+-import style from './Style/email.module.css';
++import style from './email.module.css';
+ import { HiOutlineMail } from "react-icons/hi";
+ import { Link } from '@mui/material';
+ import { FaArrowLeft } from "react-icons/fa";
+diff --git a/src/Components/Pages/checkemail/Style/email.module.css b/src/Components/Pages/checkemail/email.module.css
+rename from src/Components/Pages/checkemail/Style/email.module.css
+rename to src/Components/Pages/checkemail/email.module.css

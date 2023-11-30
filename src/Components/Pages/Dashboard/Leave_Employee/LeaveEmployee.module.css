@@ -1,0 +1,104 @@
+.Date_menu{
+    width: 82px;
+    height: 36px;
+    border-radius: 6px;
+    font-size: 14px;
+    line-height: 14px;
+    letter-spacing: -0.01em;
+    text-align: center;
+    font-weight: 500;
+    color: #00032E;
+    background-color: #FFA8C5;
+    border: none;
+    text-transform: capitalize;
+}
+.Date_menu:hover{
+    color: #00032E;
+    background-color: #FFA8C5;
+}
+
+.LEtableWrapper table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 15px;
+  }
+
+.LEtableWrapper td {
+    padding: 18px;
+    font-size: 14px;
+    color: #00032E;
+    font-weight: 500;
+}
+
+.LEtableWrapper th {
+    background-color: #CCCFFF;
+    padding: 12px;
+    font-size:16px;
+    text-align: left;
+}
+
+.LEtableWrapper tr:nth-child(even) {
+    background-color: #E5E7FF;
+}
+
+.LEtableWrapper tr:nth-child(odd) {
+    background-color: #F2F5FF;
+}
+
+  .Approved{
+    width: 66px;
+    height: 20px;
+    border-radius: 10px;
+    background-color: #15C787;
+    color: #00032E;
+    font-size:10px;
+    text-transform: capitalize;
+    margin-right: 10px;
+  }
+  .Approved:hover{
+    background-color: #15C787;
+    color: #00032E;
+  }
+  .Decline{
+    width: 66px;
+    height: 20px;
+    border-radius: 10px;
+    background-color: #F46A6A;
+    color: #00032E;
+    font-size:10px;
+    text-transform: capitalize;
+  }
+  .Decline:hover{
+    background-color: #F46A6A;
+    color: #00032E;
+  }
+  .tablesubtitle{
+    padding: 10px;
+    font-size: 18px;
+  }
+  .cancelButton{
+    width: 83px;
+    height: 37px;
+    border-radius: 6px;
+    background-color: #F5F5F5;
+    color: #00032E;
+    font-size:16px;
+    text-transform: capitalize;
+}
+.doneButton{
+    width: 83px;
+    height: 37px;
+    border-radius: 6px;
+    background-color:#FFA8C5;
+    color: #00032E;
+    font-size:16px;
+    text-transform: capitalize;
+}
+.doneButton:hover{
+    background-color:#FFA8C5;
+    color: #00032E;
+}
+.cancelButton:hover{
+    background-color: #F5F5F5;
+    color: #00032E;
+}

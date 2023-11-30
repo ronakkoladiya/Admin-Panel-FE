@@ -1,0 +1,178 @@
+.calenderWrapper{
+    margin:0;
+}
+
+.calenderWrapper .calender{
+    width: 100%;
+    padding: 40px;
+    background-color: white;
+    border-radius: 20px;
+}
+
+.calenderWrapper [aria-label="Today"]{
+    display: none!important;
+}
+
+.calenderWrapper [data-testid="grid"] .rs__cell, .calenderWrapper [data-testid="grid"] > div:first-child, .calenderWrapper [data-testid="grid"] > div:last-child{
+    border: none!important;
+}
+
+.calenderWrapper [data-testid="grid"] > div:first-child{
+    background-color: white;
+    margin-bottom: 25px!important;
+    text-align: left;
+}
+
+.calenderWrapper [data-testid="grid"] > div:first-child p{
+    text-align: left;
+    margin-left: 15px;
+}
+
+.calenderWrapper [data-testid="rs-wrapper"] > div:first-child{
+    margin-bottom: 40px;
+}
+
+.calenderWrapper [data-testid="grid"] > div:last-child .rs__cell{
+    height: 80px!important;
+    margin: 5px;
+    border-radius: 20px;
+}
+
+.calenderWrapper [data-testid="grid"] > div:last-child .rs__cell .MuiButton-root{
+    border-radius: 20px;
+}
+
+.calenderWrapper [data-testid="grid"] > div:last-child .rs__cell:hover .MuiButton-root{
+    background: rgba(25, 118, 210, 0.1)!important;
+}
+
+.calenderWrapper [data-testid="grid"] > div:last-child .rs__cell .MuiAvatar-root{
+    margin-left: 15px;
+    margin-top: 15px;
+}
+
+/* to highlight today */
+.calenderWrapper div[style*="background: rgb(156, 39, 176)"]{
+    height: 32px!important;
+    width: 32px!important;
+    border-radius: 5px;
+    background-color: #FFA8C5!important;
+}
+
+.calenderWrapper [data-testid="date-navigator"]{
+    display: flex;
+    align-items: center;
+}
+
+.calenderWrapper [data-testid="date-navigator"] [aria-label*="selected"]{
+    order: -1;
+    color: #00032E!important;
+    font-size: 20px;
+    text-transform: capitalize;
+    width: 180px;
+    border-radius: 10px;
+}
+
+.calenderWrapper [data-testid="date-navigator"] .MuiIconButton-root{
+    height: 36px;
+    width: 36px;
+    line-height: 36px;
+    text-align: center;
+    margin: 0 10px;
+    background-color: #8189FF;
+    color: white;
+    transition: .3s;
+}
+
+.calenderWrapper [data-testid="date-navigator"] .MuiIconButton-root:hover{
+    background-color: #7676eb;
+}
+
+
+/* sunday and saturday color change */
+.calenderWrapper [data-testid="grid"] > div:last-child .rs__cell [aria-label*="Sunday"]{
+    background-color: rgba(121, 124, 150, 0.15);
+}
+
+.calenderWrapper [data-testid="grid"] > div:last-child .rs__cell:nth-child(7) [aria-label*="Saturday"],
+.calenderWrapper [data-testid="grid"] > div:last-child .rs__cell:nth-child(21) [aria-label*="Saturday"],
+.calenderWrapper [data-testid="grid"] > div:last-child .rs__cell:nth-child(35) [aria-label*="Saturday"],
+.calenderWrapper [data-testid="grid"] > div:last-child .rs__cell:nth-child(42) [aria-label*="Saturday"]{
+    background-color: rgba(121, 124, 150, 0.15);
+}
+
+.calenderWrapper .rs__multi_day{
+    top: 45px!important;
+    left: 15px!important;
+    width: 60%!important;
+    height: 25px;
+}
+
+.calenderWrapper .rs__multi_day.rs__hover__op{
+    top: 15%!important;
+    left: 65%!important;
+    width: 30%!important;
+}
+
+.calenderWrapper [data-testid="view-navigator"] .MuiButtonBase-root:not(.MuiButton-colorInherit), .calenderWrapper .rs__today_cell div p{
+    color: #8189FF!important;
+}
+
+.calenderWrapper .rs__multi_day .MuiPaper-elevation{
+    box-shadow: none!important;
+    color: black;
+    padding-top: 2px;
+}
+
+.css-nl6has .MuiButton-root{
+    color: white!important;
+}
+
+.css-s22wio > div{
+    color: black!important;
+}
+
+
+
+/* media query */
+
+@media only screen and (max-width: 688px){
+
+    .calenderWrapper .css-e572m3 p{
+        margin-left: 12px;
+    }
+
+}
+
+@media only screen and (max-width: 425px){
+
+    .calenderWrapper .calender{
+        padding: 40px 30px;
+    }
+
+    .calenderWrapper [data-testid="date-navigator"] [aria-label*="selected"]{
+        font-size: 16px;
+        width: 150px;
+    }
+
+    .calenderWrapper [data-testid="date-navigator"] .MuiIconButton-root{
+        height: 30px;
+        width: 30px;
+        line-height: 30px;
+        margin: 0 5px;
+    }
+
+}
+
+@media only screen and (max-width: 350px){
+
+    .calenderWrapper [data-testid="date-navigator"] [aria-label*="selected"]{
+        font-size: 14px;
+        width: 125px;
+    }
+
+    .calenderWrapper [data-testid="date-navigator"]{
+        overflow-x: scroll;
+    }
+
+}

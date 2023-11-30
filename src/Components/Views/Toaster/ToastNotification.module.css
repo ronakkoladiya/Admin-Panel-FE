@@ -1,0 +1,56 @@
+/* Toaster.module.css */
+.snackbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 100%;
+}
+.snackbarStyle {
+  display: flex;
+  background-color: #011e3b !important;
+  width: 92%;
+  max-width: 519px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 4px;
+}
+
+.snackbarTitle {
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+  flex: 1;
+  background-color: inherit;
+}
+
+.snackbarCancel {
+  color: #1fd68d !important;
+  margin-left: auto;
+  margin-right: 15px;
+  cursor: pointer;
+}
+
+.circularProgress {
+  color: #fff !important;
+}
+
+.circularText {
+  color: #fff !important;
+  font-size: 12px;
+}
+
+.bottom {
+  position: absolute;
+  left: 0;
+  color: #52585c !important;
+}
+
+.snackbarIcon {
+  color: #f36879 !important;
+  margin-right: 10px;
+}
+
+.doneIcon {
+  color: #1fd68d;
+  margin-right: 10px;
+}

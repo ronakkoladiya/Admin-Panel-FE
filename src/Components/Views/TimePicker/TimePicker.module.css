@@ -1,0 +1,55 @@
+.clockIcon{
+    position: absolute;
+    cursor: pointer;
+    top: 18%;
+    right: 2%;
+}
+.timeField{
+    position: relative;
+    
+}
+.cancelButton{
+    width: 83px;
+    height: 37px;
+    border-radius: 6px;
+    background-color: #F5F5F5;
+    color: #00032E;
+    font-size:16px;
+    text-transform: capitalize;
+}
+.doneButton{
+    width: 83px;
+    height: 37px;
+    border-radius: 6px;
+    background-color:#FFA8C5;
+    color: #00032E;
+    font-size:16px;
+    text-transform: capitalize;
+}
+.doneButton:hover{
+    background-color:#FFA8C5;
+    color: #00032E;
+}
+.cancelButton:hover{
+    background-color: #F5F5F5;
+    color: #00032E;
+}
+
+.Date_menu{
+    width: 82px;
+    height: 36px;
+    border-radius: 6px;
+    font-size: 14px;
+    line-height: 14px;
+    letter-spacing: -0.01em;
+    text-align: center;
+    font-weight: 500;
+    color: #00032E;
+    background-color: #FFA8C5;
+    border: none;
+    text-transform: capitalize;
+}
+.Date_menu:hover{
+    color: #00032E;
+    background-color: #FFA8C5;
+}

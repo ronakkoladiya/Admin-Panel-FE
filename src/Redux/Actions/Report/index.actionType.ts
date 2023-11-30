@@ -1,0 +1,5 @@
+export const REPORT_Add_DETAILS = "REPORT_Add_DETAILS";
+export const REPORT_ALL_LIST = "REPORT_ALL_LIST";
+export const REPORT_LIST ="REPORT_LIST";
+export const ALL_EMPLOYEE_NAME ="ALL_EMPLOYEE_NAME";
+export const ALL_PROJECT_NAME ="ALL_PROJECT_NAME";

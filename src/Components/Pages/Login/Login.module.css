@@ -1,0 +1,71 @@
+.loginwrapper{
+    padding: 80px 60px;
+}
+
+.logo,.banner{
+    width: 100%;
+}
+
+.banner{
+    background-image: linear-gradient(to left, rgba(0, 9, 129, 0.5), rgba(254, 15, 94, 0.51)), url(../../../Assest/login_banner_3.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.heading{
+    font-size: 40px;
+    line-height: 40px;
+}
+
+.headingdescription{
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.60);
+}
+
+.fieldtitle{
+    color: rgba(0, 0, 0, 0.6);
+    display: block;
+    margin-bottom: 3px;
+    font-weight: 600;
+}
+
+.remcheckbox{
+    margin: 0 5px;
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}
+
+.remlabel{
+    color: rgba(0, 0, 0, 0.6);
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.forgotpass{
+    color: #000981;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+{/* media query */}
+@media only screen and (max-width: 900px){
+    .banner{
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 600px){
+    .loginwrapper{
+        padding: 40px;
+    }
+}
+
+@media only screen and (max-width: 425px){
+    .loginwrapper{
+        padding: 40px 20px;
+    }
+}

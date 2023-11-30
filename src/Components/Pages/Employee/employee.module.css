@@ -1,0 +1,122 @@
+.emp_main {
+    margin-top: 23px;
+}
+
+.emp_card {
+    /* border: 1px solid green; */
+    background-color: rgba(255, 255, 255, 1);
+    padding: 40px;
+    border-radius: 20px;
+}
+
+.emp_ser {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    row-gap: 10px;
+}
+
+.emp_search {
+    width: 100%;
+    height: 38px;
+    border-radius: 20px;
+    border: 0;
+    background-color: #F2F5FF;
+    padding-left: 38px;
+    position: relative;
+    font-weight: 600;
+    padding-right: 10px;
+}
+
+.emp_search:focus,
+.emp_select:focus {
+    outline: none;
+}
+
+.emp_icon {
+    position: absolute;
+    top: 11px;
+    left: 16px;
+}
+
+.emp_select {
+    background-color: #F2F5FF;
+    width: 120px;
+    height: 38px;
+    border: 0;
+    padding: 0 10px;
+    border-radius: 5px;
+    color: rgba(128, 130, 151, 1);
+    font-weight: 600;
+}
+
+.employeeCardBoxContainer {
+    margin-top: 20px;
+}
+
+.employeeCardBox {
+    padding: 16px 12px;
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    min-height: 140px;
+    height: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    transition: all 0.3s;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -2px 0px inset;
+}
+
+.employeeCardBox:hover {
+    background-color: #00098115;
+    border: 1px solid #000981;
+    transition: all 0.3s;
+    box-shadow: 0 0 4px 0 #0009814D;
+}
+
+.profileImage {
+    width: 53px;
+    height: 53px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.employeeDetailBox {
+    flex: 1;
+    padding: 4px 0;
+}
+
+.employeeName {
+    font-size: 18px;
+    font-weight: 600;
+    color: #00032E;
+}
+
+.employeeBranch {
+    font-size: 15px;
+    font-weight: 400;
+    color: #00032E;
+}
+
+.employeeDesignation {
+    margin: 10px 0;
+    color: #000981;
+    padding: 2px 12px;
+    border: 1px solid #000981;
+    border-radius: 10px;
+    width: fit-content;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.alertIco{
+    margin: 5px;
+    color: #ff281c;
+    filter: drop-shadow(0 0 5px #ff4832);
+}
+
+.locationIco{
+    margin-right: 3px;
+    margin-bottom: -1px;
+}

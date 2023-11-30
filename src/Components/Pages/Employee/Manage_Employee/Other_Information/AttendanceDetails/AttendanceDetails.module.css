@@ -1,0 +1,11 @@
+.textTypography{
+font-size: 14px;
+color: #00032E;
+font-weight: 400;
+}
+.textTypographyspan{
+    color: #000981;
+    font-size: 14px;
+    font-weight: 600;
+    margin-left: 5px;
+}

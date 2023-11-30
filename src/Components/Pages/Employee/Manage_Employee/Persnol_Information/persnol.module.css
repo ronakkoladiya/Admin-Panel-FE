@@ -1,0 +1,86 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Open Sans", sans-serif;
+}
+
+.card_div2 {
+    margin-top: 25px;
+    padding: 18px 25px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    color: #00032E;
+    overflow-x: auto;
+}
+
+.card_div2 h6 {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 18px;
+    letter-spacing: 0;
+    text-align: left;
+    color: #00032E;
+}
+
+.main_type_div {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.main_type_div2 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.mng_type_div {
+    min-width: 200px;
+    width: 25%;
+    margin-top: 20px;
+}
+
+.mng_type_div1 {
+    width: 227px;
+}
+
+.type_p1 {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0;
+    text-align: left;
+    color: #4D4F6D;
+}
+
+.type_p2 {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 16px;
+    letter-spacing: 0;
+    text-align: left;
+    color: #000981;
+    margin-top: 8px;
+}
+
+.card_div3 {
+    margin-top: 25px;
+    padding: 18px 25px 55px 25px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    color: #00032E;
+}
+
+.card_div3 h6 {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 18px;
+    letter-spacing: 0;
+    text-align: left;
+    color: #00032E;
+}
+
+.address_div {
+    margin-top: 30px;
+}

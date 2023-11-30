@@ -1,0 +1,131 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.attend_main {
+  margin-top: 23px;
+}
+.attend_main_card {
+  background-color: transparent;
+  border-radius: 20px;
+  margin:0px auto;
+}
+
+.attend_menu_div {
+  height: 40px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.attend_select:focus {
+  outline: none;
+}
+.attend_select {
+  /* text-align: center; */
+  /* appearance: none; */
+  position: relative;
+  background-color: #ffffff ;
+  width: 120px;
+  height: 38px;
+  border: 0;
+  padding: 0px 10px;
+  border-radius: 5px;
+  color: black;
+  font-weight: 600;
+  margin-right: 20px;
+}
+.attend_card {
+  /* border: 1px solid green; */
+  display: flex;
+  flex-direction: column;
+  min-height: 80vh;
+  background-color: rgba(255, 255, 255, 1);
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 10px;
+}
+
+.attend_card_menu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  margin-top: 10px;
+}
+
+.attend_card_menu_left {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 300px;
+}
+.attend_card_menu_left_btn{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.attend_card_menu_right {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.attend_card_menu_right_tick {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 10px;
+}
+
+.attend_card_menu_right_tick_para {
+  padding-left: 5px;
+  font-size: 14px;
+}
+.attend_card_menu_left_divicon {
+  background: #8189ff;
+  /* padding :18px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 40px;
+  margin-left: 10px;
+  font-size: 30px;
+  cursor: pointer;
+  font-weight: 600;
+  color: white;
+  border-radius: 50%;
+  border: none;
+}
+.attend_card_menu_left_div_icon{
+  color: white;
+}
+
+/* table  */
+.attend_card_table {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  
+}
+.no-border-box-shadow {
+  border: none !important;
+  box-shadow: none !important;
+  overflow-x: auto;
+}
+
+@media (max-width: 900px) {
+  .attend_card_menu{
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .attend_card_menu_right{
+    padding-top: 20px;
+  }
+  .attend_card_menu_left{
+    width: 100%;
+  }
+}
